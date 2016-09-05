@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>First Page</title>
+</h:head>
+<h:body>
+	<f:view locale="#{clientLocaleBean.clientLocaleLocale}">
+		<h:form>
+			<h:selectOneMenu value="#{clientLocaleBean.clientLocale}">
+				<f:selectItems value="#{clientLocaleBean.supportedLocales}" />
+				<f:ajax listener="#{clientLocaleBean.switchLocale}"
+					render=":form1 :lo" />
+			</h:selectOneMenu>
+		</h:form>
+		<h:form id="form1">
+			<h:panelGrid columns="3">
+
+				<h:outputLabel value="#{msgs.title} " for="title" />
+				<h:selectOneRadio value="#{applicant.title}" id="title"
+					required="true">
+					<f:selectItem itemLabel="Dr." itemValue="1" />
+					<f:selectItem itemLabel="Ms." itemValue="2" />
+					<f:selectItem itemLabel="Mrs." itemValue="3" />
+					<f:selectItem itemLabel="Miss" itemValue="4" />
+					<f:selectItem itemLabel="Mr." itemValue="5" />
+				</h:selectOneRadio>
+				<h:message for="title" />
+
+				<h:outputLabel value="#{msgs.firstName}" for="firstName" />
+				<h:inputText value="#{applicant.firstName }" id="firstName"
+					converter="nameCapConvertor" required="true" />
+				<h:message for="firstName" />
+
+				<h:outputLabel value="#{msgs.lastName}" for="lastName" />
+				<h:inputText value="#{applicant.lastName}" id="lastName"
+					converter="nameCapConvertor" required="true" />
+				<h:message for="lastName" />
+
+				<h:outputLabel value="#{msgs.country}" for="country" />
+				<h:selectOneMenu id="country" value="#{applicant.country}"
+					required="true">
+					<f:selectItem itemLabel="-- Please select a country --"
+						noSelectionOption="true" />
+					<f:selectItems value="#{countryList.countryList}" />
+				</h:selectOneMenu>
+				<h:message for="country" />
+
+				<h:outputLabel value="#{msgs.salary}" for="salary" required="true" />
+				<h:inputText value="#{applicant.salary}" id="salary">
+					<f:convertNumber type="currency" integerOnly="true" />
+					<f:validateLongRange for="salary" maximum="100" minimum="10" />
+				</h:inputText>
+				<h:message for="salary" />
+
+				<h:outputLabel value="#{msgs.email}" for="email" />
+				<h:inputText value="#{applicant.email}" id="email" required="true">
+					<f:validator validatorId="emailValidator" />
+				</h:inputText>
+				<h:message for="email" />
+
+			</h:panelGrid>
+
+			<h:commandButton value="#{msgs.addApplicant}"
+				action="#{applicantController.addApplicant}" />
+			<h:commandButton actionListener="#{applicantController.clearForm}"
+				value="#{msgs.clearContent}" immediate="true" />
+			<h:commandButton action="cancelJobApplicant"
+				value="#{msgs.cancelButton}" id="cancelButton" immediate="true" />
+
+			<h:messages globalOnly="true" />
+
+		</h:form>
+		<br />
+
+		<br /> Locale : <h:outputLabel
+			value="#{clientLocaleBean.clientLocaleLocale}" id="lo" />
+	</f:view>
+</h:body>
+</html>
