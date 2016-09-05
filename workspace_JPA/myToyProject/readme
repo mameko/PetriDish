@@ -1,0 +1,83 @@
+
+3. EE exmaple
+	@PersistenceContext
+	*em.persist()
+	*em.merge()
+	*em.find()
+	*em.detach()	
+	em.clear()
+	*em.contain)()
+	em.getDelegate()
+	em.joinTx()
+	*em.refresh()
+	em.unwrap
+
+<dependency>
+    <groupId>javax</groupId>
+    <artifactId>javaee-api</artifactId>
+    <version>6.0</version>
+    <scope>provided</scope>
+</dependency>
+
+						
+try context propergation as well
+	
+4. try Tx types
+	1) non JTA -> 1.
+	2) JTA - tx scope
+			- extended
+
+input.html/jsp -> servletDirect -> 	jpa -> display on result.jsp
+					application managed
+input.html/jsp -> servlet -> ejb -> jpa -> display on result.jsp
+					container managed
+					ejb stateless -> tx scope
+						stateful  -> extended scope
+
+5. ORM
+    @Column
+	@Enumarate
+	@Basic
+	@Collection
+	@joinColumn
+	@joinTable
+	@AssociationOverride
+	@AttributeOverride
+
+	class strategy 
+		single table
+		joined
+		1 table/ concreate class
+	@maapedsupperclass
+		employee contractor, regular, FT, PT
+					
+6. JPQL
+	
+7. Criteria API
+
+8. listener & callback method
+	default -> set in persistence.xml
+	@Listener -> include litsener class
+					test inheritence as well. 
+	(parent class's should run first, listener should run before callbacks)
+	callback in a class	
+		@PrePersist		@PostPersist
+		@PreRemove		@PostRemove
+		@PreUpdate		@PostUpdate
+						@PostLoad
+================================================
+1. SE exmaple
+	
+	emf = Peresistence.getEntityManagerFactory
+	em = emf.getEntityManager
+	em.getTx.begin()
+	em.getTx.commit()
+	
+	em.close()
+	emf.close()
+	
+2. take a look at the 2nd level cache
+	em.getFactory)().getcache()...
+	
+
+	
